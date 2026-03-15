@@ -41,12 +41,15 @@ def check_guess(guess, secret):
         else:
             return "Too Low", "📈 Go HIGHER!"
     except TypeError:
-        g = str(guess)
-        if g == secret:
+        # Collaborated with Claude: fixed string fallback to use int conversion
+        # instead of string comparison, and corrected swapped hint messages
+        g = int(str(guess))
+        s = int(str(secret))
+        if g == s:
             return "Win", "🎉 Correct!"
-        if g > secret:
-            return "Too High", "📈 Go HIGHER!"
-        return "Too Low", "📉 Go LOWER!"
+        if g > s:
+            return "Too High", "📉 Go LOWER!"
+        return "Too Low", "📈 Go HIGHER!"
 
 
 def update_score(current_score: int, outcome: str, attempt_number: int):
@@ -57,8 +60,8 @@ def update_score(current_score: int, outcome: str, attempt_number: int):
         return current_score + points
 
     if outcome == "Too High":
-        if attempt_number % 2 == 0:
-            return current_score + 5
+        # Collaborated with Claude: removed incorrect +5 reward on even attempts;
+        # wrong guesses should always deduct points
         return current_score - 5
 
     if outcome == "Too Low":
@@ -108,8 +111,9 @@ if "history" not in st.session_state:
 
 st.subheader("Make a guess")
 
+# Collaborated with Claude: replaced hardcoded "1 and 100" with dynamic range
 st.info(
-    f"Guess a number between 1 and 100. "
+    f"Guess a number between {low} and {high}. "
     f"Attempts left: {attempt_limit - st.session_state.attempts}"
 )
 
@@ -134,8 +138,12 @@ with col3:
     show_hint = st.checkbox("Show hint", value=True)
 
 if new_game:
+    # Collaborated with Claude: fixed new game to use difficulty-based range,
+    # and reset status and score so previous game state doesn't carry over
     st.session_state.attempts = 0
-    st.session_state.secret = random.randint(1, 100)
+    st.session_state.secret = random.randint(low, high)
+    st.session_state.status = "playing"
+    st.session_state.score = 0
     st.success("New game started.")
     st.rerun()
 
@@ -157,10 +165,9 @@ if submit:
     else:
         st.session_state.history.append(guess_int)
 
-        if st.session_state.attempts % 2 == 0:
-            secret = str(st.session_state.secret)
-        else:
-            secret = st.session_state.secret
+        # Collaborated with Claude: removed string casting on even attempts
+        # which broke correct guesses and triggered flawed string comparison
+        secret = st.session_state.secret
 
         outcome, message = check_guess(guess_int, secret)
 
