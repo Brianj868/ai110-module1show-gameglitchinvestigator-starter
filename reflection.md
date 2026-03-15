@@ -24,6 +24,7 @@ Answer each question in 3 to 5 sentences. Be specific and honest about what actu
 
 - Give one example of an AI suggestion that was incorrect or misleading (including what the AI suggested and how you verified the result).
 
+  I asked AI to help me fix the hint logic and it made the fix correctly. But the fix was only for half of it. It completly missed the other spot that needed the fix just a few lines down. I had to go back and ask it again to fix that spot.
 ---
 
 ## 3. Debugging and testing your fixes
