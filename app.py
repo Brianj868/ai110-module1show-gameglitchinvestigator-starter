@@ -2,6 +2,7 @@ import random
 import streamlit as st
 
 def get_range_for_difficulty(difficulty: str):
+    # FIXME: Logic breaks here
     if difficulty == "Easy":
         return 1, 20
     if difficulty == "Normal":
@@ -34,6 +35,7 @@ def check_guess(guess, secret):
         return "Win", "🎉 Correct!"
 
     try:
+        # FIXME: Logic breaks here
         if guess > secret:
             return "Too High", "📈 Go HIGHER!"
         else:

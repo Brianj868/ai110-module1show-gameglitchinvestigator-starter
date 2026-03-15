@@ -8,12 +8,20 @@ Answer each question in 3 to 5 sentences. Be specific and honest about what actu
 - List at least two concrete bugs you noticed at the start  
   (for example: "the secret number kept changing" or "the hints were backwards").
 
+  The first time I ran it, the game looked like a simple number guessing game with a dev section that provides the correct answer. One bug I noticed was the hints being swapped. It should say higher when the number is lower and lower when the guess is higher. But they are backwards, so it says lower when a low guess is made and higher when a high guess is made. Another bug I noticed is when a guess is entered after an incorrect guess, clicking submit removes the hint message and counts the attempt, however, the value isn't actually registered. So even if you guess the correct value, it quietly counts as another incorrect attempt.
+
 ---
 
 ## 2. How did you use AI as a teammate?
 
 - Which AI tools did you use on this project (for example: ChatGPT, Gemini, Copilot)?
+
+  I used claude for this project.
+
 - Give one example of an AI suggestion that was correct (including what the AI suggested and how you verified the result).
+
+  I came under the assumption that the secret number would change after every button press. I asked AI why that might be. It came back with the response that there is already a guard against that. I verified it by going back and actually testing out the different buttons and something I thought was a bug turned out to be fine. The number only changed when new game was pressed.
+
 - Give one example of an AI suggestion that was incorrect or misleading (including what the AI suggested and how you verified the result).
 
 ---
