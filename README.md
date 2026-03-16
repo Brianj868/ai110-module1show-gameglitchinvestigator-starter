@@ -26,8 +26,42 @@ It wrote the code, ran away, and now the game is unplayable.
 ## 📝 Document Your Experience
 
 - [ ] Describe the game's purpose.
+
+   The games purpose is to pick a difficulty level and then proceed to try and guess a secret number in a certain amount of guesses, giving hints on whether your guess was higher or lower.
+
 - [ ] Detail which bugs you found.
+
+   The number range for two of the diffiulty levels were swapped.
+
+   The hint messages were backwards, guessing higher returned the hint to guess higher and guessing lower returned the hint to guess lower.
+
+   On even numbered attempts, the secret was cast to a string. When the guess and secret were then compared, it would return false because numerically that comparison is incorrect. This resulted in it being impossible to win on an even numbered attempt.
+
+   Wrong guesses on even numbered attempts rewarded 5 points.
+
+   The "Guess a number between" message used the hard coded values of 1 and 100 no matter the difficulty.
+
+   New Game ignored the difficulty as well and was hard coded to always generate an number between 1 and 100.
+
+   New Game didn't reset status or score.
+
+   Attempt limit map values were swapped between easy and normal.
+
+   The attempts counter started at 1.
+
+   The info in the debug display was off.
+
 - [ ] Explain what fixes you applied.
+
+   For the bugs with swapped values, they were just switched to where they should be. 
+
+   The attempt counter starting at one, I just had to change that one to a zero.
+
+   The hard coded value bugs had their values replaced with the correct variables instead of their hard coded value.
+
+   Removed the logic to reward points from the incorrect guess section.
+
+   removed the string cast on secret number.
 
 ## 📸 Demo
 
